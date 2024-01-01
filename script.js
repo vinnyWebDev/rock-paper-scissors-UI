@@ -61,7 +61,7 @@ function playRound() {
     }
 
 }
-//loop to play the game three times
+//loop to play the game three games
 function repeatGame() {
     for (i = 0; i < 3; i++){
         //computer generates new choice each time
