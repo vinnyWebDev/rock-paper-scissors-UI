@@ -1,9 +1,14 @@
-//DOM
 /*
 we create a nodelist with all the buttons of a certain id.
 The forEach loop assigns each one the same functionality
 */
 const buttons = document.querySelectorAll("#btn");
+
+const buttonsDiv = document.querySelector("#buttonsDiv");
+const results = document.querySelector("#results");
+const score = document.querySelector("#score");
+let playerScore = 0;
+let computerScore = 0;
 
 //see callback function
 buttons.forEach((btn) => {
@@ -35,8 +40,6 @@ function getComputerChoice() {
 
 /*Function which compares players choices and determines whether player wins or loses*/
 function playRound(value) {
-  console.log("test");
-
   let playerSelection = value;
   console.log(playerSelection);
   let computerSelection = getComputerChoice();
@@ -45,23 +48,40 @@ function playRound(value) {
   computerSelection = computerSelection.toLowerCase();
   /*If player chooses rock*/
   if (playerSelection === "rock" && computerSelection === "scissors") {
-    alert("You win! Rock breaks scissors.");
+    results.textContent = "Rock breaks scissors.";
+    playerScore++;
   } else if (playerSelection === "rock" && computerSelection === "paper") {
-    alert("You lose! Paper covers rock.");
+    results.textContent = "Paper covers rock.";
+    computerScore++;
   } else if (playerSelection === "paper" && computerSelection === "rock") {
     /*If player chooses paper*/
-    alert("You win! Paper covers rock.");
+    results.textContent = "Paper covers rock.";
+    playerScore++;
   } else if (playerSelection === "paper" && computerSelection === "scissors") {
-    alert("You lose! Scissors cuts paper.");
+    results.textContent = "Scissors cuts paper.";
+    computerScore++;
   } else if (playerSelection === "scissors" && computerSelection === "paper") {
     /*If player chooses scissors*/
-    alert("You win! Scissors cuts paper.");
+    results.textContent = "Scissors cuts paper.";
+    playerScore++;
   } else if (playerSelection === "scissors" && computerSelection === "rock") {
-    alert("You lose! Rock breaks scissors.");
+    results.textContent = "Rock breaks scissors.";
+    computerScore++;
   } else if (playerSelection === computerSelection) {
     /*If player and computer choose the same weapon*/
-    alert("It's a tie! You've both selected the same.");
+    results.textContent = "It's a tie! You've both selected the same.";
   } else {
-    alert("Invalid input");
+    results.textContent = "Invalid input";
+  }
+  //displaying the score of each player
+  score.textContent = "Player:" + playerScore + " Computer:" + computerScore;
+
+  if (playerScore == 5 || computerScore == 5) {
+    buttonsDiv.style.visibility = "hidden";
+    if (playerScore == 5) {
+      results.textContent = "You win!";
+    } else {
+      results.textContent = "Computer wins!";
+    }
   }
 }
