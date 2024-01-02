@@ -3,14 +3,15 @@ we create a nodelist with all the buttons of a certain id.
 The forEach loop assigns each one the same functionality
 */
 const buttons = document.querySelectorAll("#btn");
-
+//various UI nodes
 const buttonsDiv = document.querySelector("#buttonsDiv");
 const results = document.querySelector("#results");
 const score = document.querySelector("#score");
+//Scores, initialised to zero
 let playerScore = 0;
 let computerScore = 0;
 
-//see callback function
+//Assigning event listener to each function, see callback function
 buttons.forEach((btn) => {
   /*I've inserted an arrow function which calls playRound. 
    if I try to call playround itslef, i either can't pass the values or it runs automatically.
@@ -20,30 +21,32 @@ buttons.forEach((btn) => {
   });
 });
 
-//btn.addEventListener("click", playRound);
-
 /*Function which radomly selects computer's choice of weapon*/
 function getComputerChoice() {
   let num = Math.floor(Math.random() * 3);
   let computerChoice;
 
-  if (num == 0) {
-    computerChoice = "Rock";
-  } else if (num == 1) {
-    computerChoice = "Paper";
-  } else {
-    computerChoice = "Scissors";
+  //assign computer choice based on random num
+  switch (num) {
+    case 0:
+      computerChoice = "Rock";
+      break;
+    case 1:
+      computerChoice = "Paper";
+      break;
+    case 2:
+      computerChoice = "Scissors";
+      break;
   }
-
   return computerChoice;
 }
 
 /*Function which compares players choices and determines whether player wins or loses*/
 function playRound(value) {
   let playerSelection = value;
-  console.log(playerSelection);
+
   let computerSelection = getComputerChoice();
-  /*converts all input to lowercase*/
+  //converts all input to lowercase
   playerSelection = playerSelection.toLowerCase();
   computerSelection = computerSelection.toLowerCase();
   /*If player chooses rock*/
