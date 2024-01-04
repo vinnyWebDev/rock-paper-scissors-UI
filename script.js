@@ -4,12 +4,24 @@ The forEach loop assigns each one the same functionality
 */
 const buttons = document.querySelectorAll("#btn");
 //various UI nodes
+const middleDiv = document.querySelector("#middleDiv");
+const bodyContent = document.querySelector("#bodyContent");
 const buttonsDiv = document.querySelector("#buttonsDiv");
 const results = document.querySelector("#results");
-const score = document.querySelector("#score");
+const playerScoreOut = document.querySelector("#playerScore");
+const computerScoreOut = document.querySelector("#computerScore");
+const replayBtn = document.createElement("button");
 //Scores, initialised to zero
 let playerScore = 0;
 let computerScore = 0;
+
+//play again button
+replayBtn.textContent = "Play Again!";
+replayBtn.classList.add("replayBtn");
+
+replayBtn.addEventListener("click", () => {
+  location.reload();
+});
 
 //Assigning event listener to each function, see callback function
 buttons.forEach((btn) => {
@@ -77,10 +89,16 @@ function playRound(value) {
     results.textContent = "Invalid input";
   }
   //displaying the score of each player
-  score.textContent = "Player:" + playerScore + " Computer:" + computerScore;
+  playerScoreOut.textContent = "Player: " + playerScore;
+  computerScoreOut.textContent = "CPU: " + computerScore;
 
   if (playerScore == 5 || computerScore == 5) {
-    buttonsDiv.style.visibility = "hidden";
+    buttons.forEach((btn) => {
+      btn.disabled = true;
+    });
+
+    bodyContent.appendChild(replayBtn);
+
     if (playerScore == 5) {
       results.textContent = "You win!";
     } else {
