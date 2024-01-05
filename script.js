@@ -18,6 +18,8 @@ let computerScore = 0;
 //play again button
 replayBtn.textContent = "Play Again!";
 replayBtn.classList.add("replayBtn");
+middleDiv.appendChild(replayBtn);
+replayBtn.style.visibility = "hidden";
 
 replayBtn.addEventListener("click", () => {
   location.reload();
@@ -93,11 +95,11 @@ function playRound(value) {
   computerScoreOut.textContent = "CPU: " + computerScore;
 
   if (playerScore == 5 || computerScore == 5) {
+    replayBtn.style.visibility = "visible";
+
     buttons.forEach((btn) => {
       btn.disabled = true;
     });
-
-    bodyContent.appendChild(replayBtn);
 
     if (playerScore == 5) {
       results.textContent = "You win!";
